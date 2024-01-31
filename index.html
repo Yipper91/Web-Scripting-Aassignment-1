@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>MDIA 2294</title>
+	
+	<style>
+	    thead{
+	        font-weight:bold;
+	    }
+	    
+	    td{
+	        padding-left:5px;
+	        padding-right:5px;	        
+	    }
+	    
+	    td.sub-total{
+	        text-align:right;	        
+	    }
+	</style>
+</head>
+<body>
+	<h1>MDIA 2294: The Random Corp Invoice</h1>
+	
+	<table>
+	    <thead>
+	        <tr>
+	            <td>ITEM</td>
+	            <td>DESCRIPTION</td>
+	            <td>QTY</td>
+	            <td>PRICE</td>
+	            <td>LINE TOTAL</td>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>1</td>
+	            <td><input id="line-1-description" type="text" size="40" value="Sebasthian's Pasta Maker" /></td>
+	            <td><input id="line-1-quantity" type="text" size="3" value="5" /></td>
+	            <td><input id="line-1-price" type="text" size="6" value="35.00" /></td>
+	            <td class="sub-total"><span id="line-1"></span></td>
+	        </tr>
+	        <tr>
+	            <td>2</td>
+	            <td><input id="line-2-description" type="text" size="40" value="Stephen's Easel" /></td>
+	            <td><input id="line-2-quantity" type="text" size="3" value="2" /></td>
+	            <td><input id="line-2-price" type="text" size="6" value="24.99" /></td>
+	            <td class="sub-total"><span id="line-2"></span></td>
+	        </tr>
+	        <tr>
+	            <td>3</td>
+	            <td><input id="line-3-description" type="text" size="40" value="Jeff's Giant Flamethrower" /></td>
+	            <td><input id="line-3-quantity" type="text" size="3" value="1" /></td>
+	            <td><input id="line-3-price" type="text" size="6" value="125.50" /></td>
+	            <td class="sub-total"><span id="line-3"></span></td>
+	        </tr>
+	        <tr>
+	            <td>4</td>
+	            <td><input id="line-4-description" type="text" size="40" value="Jayden's Ball Bearings" /></td>
+	            <td><input id="line-4-quantity" type="text" size="3" value="1000" /></td>
+	            <td><input id="line-4-price" type="text" size="6" value="0.25" /></td>
+	            <td class="sub-total"><span id="line-4"></span></td>
+	        </tr>
+	        <tr>
+	            <td>5</td>
+	            <td><input id="line-5-description" type="text" size="40" value="Cole's Moped" /></td>
+	            <td><input id="line-5-quantity" type="text" size="3" value="12" /></td>
+	            <td><input id="line-5-price" type="text" size="6" value="15.25" /></td>
+	            <td class="sub-total"><span id="line-5"></span></td>
+	        </tr>
+	    </tbody>
+	    <tfoot>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">SUB TOTAL</td>  
+	            <td class="sub-total"><span id="sub-total"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">DISCOUNT</td>  
+	            <td class="sub-total"><span id="discount"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">TAX</td>  
+	            <td class="sub-total"><span id="tax"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">TOTAL</td>  
+	            <td class="sub-total" style="border-top:solid black 1px"><span id="Total"></span></td>	        
+	        </tr>
+	    </tfoot>	    
+	</table>
+	
+	<div><button id="calculate">Calculate</button></div>
+	<div>NOTE: discounts of 10% are given to orders over $250</div>
+
+	<script>
+
+		const calc_btn = document.querySelector("#calculate");	
+
+	    function calculate() {
+            
+			let line_total = 0;
+			let sub_total = 0;
+			let tax_total = 0;
+			let grand_total = 0;
+
+		// ITEM 1
+			const l1_quantity = document.querySelector("#line-1-quantity").value;
+			// This targets the l1_quantity and the value input in the line-1-quantity.
+
+			const l1_price = document.querySelector("#line-1-price").value;
+			// This targets the value input in the line-1-price.
+
+			line_total = l1_quantity * l1_price;
+			// The line_total equals the line-1-quantity multiplied by the line-1-price ($35)
+
+			document.querySelector("#line-1").innerHTML = line_total.toFixed(2);
+			// This updates the line_total with the previous calculation.
+
+			sub_total += line_total;
+			// This adds up all the line_totals to create a sub_total.
+
+		// ITEM 2
+			const l2_quantity = document.querySelector("#line-2-quantity").value;
+			const l2_price = document.querySelector("#line-2-price").value;
+
+			line_total = l2_quantity * l2_price;
+			document.querySelector("#line-2").innerHTML = line_total.toFixed(2);
+			sub_total += line_total;
+
+		// ITEM 3
+			const l3_quantity = document.querySelector("#line-3-quantity").value;
+			const l3_price = document.querySelector("#line-3-price").value;
+
+			line_total = l3_quantity * l3_price;
+			document.querySelector("#line-3").innerHTML = line_total.toFixed(2);
+			sub_total += line_total;
+
+		// ITEM 4
+			const l4_quantity = document.querySelector("#line-4-quantity").value;
+			const l4_price = document.querySelector("#line-4-price").value;
+
+			line_total = l4_quantity * l4_price;
+			document.querySelector("#line-4").innerHTML = line_total.toFixed(2);
+			sub_total += line_total;
+
+		// ITEM 5
+			const l5_quantity = document.querySelector("#line-5-quantity").value;
+			const l5_price = document.querySelector("#line-5-price").value;
+
+			line_total = l5_quantity * l5_price;
+			document.querySelector("#line-5").innerHTML = line_total.toFixed(2);
+			sub_total += line_total;
+
+		// SUB TOTAL
+			document.querySelector("#sub-total").innerHTML = sub_total;
+			// This updates the sub_total for all the combined line_total.
+
+		// DISCOUNT
+			const discount_total = (sub_total >= 250) ? sub_total * 0.1 : 0;
+			// If the discount_total is equal or over 250, then the sub_total will be multiplied by 10%. If not, the discount_total will be 0.
+
+			// if (sub_total >= 250) {
+			// 	discount_total = sub_total * 0.1;
+			// } else {
+			// 	discount_total = 0;
+			// }
+
+			document.querySelector("#discount").innerHTML = discount_total.toFixed(2);
+			// This will update the discount_total and will round to two decimal points.
+
+		// TAX
+			tax_total = (sub_total - discount_total) * 0.12;
+			// The tax_total is calculated by taking the sub_total and subtracting the discount-total. Then, that amount is multiplied by the 12% tax.
+
+			document.querySelector("#tax").innerHTML = tax_total.toFixed(2);
+			// This updates the tax_total and will round to two decimal points.
+
+		// TOTAL
+			grand_total = sub_total - discount_total + tax_total;
+			//The grand total will equal to the sub_total minus the discount_total and add the tax_total.
+
+			document.querySelector("#Total").innerHTML = grand_total.toFixed(2);
+			// This updates the grand_total and will round to two decimal points.
+	    }
+	
+		calc_btn.addEventListener("click", calculate)
+		// This adds a click function to the calculate button which runs the script.
+
+    </script>
+</body>
+</html>
